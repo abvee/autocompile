@@ -1,16 +1,13 @@
 #!/bin/bash
 
-function compile {
-	for i in "$@"; do
-		echo "$i"
-	done
-}
+compiler=cc
 
 while [ -n "$1" ]; do
 	case "$1" in
 		--)
 			shift
-			compile "$@"
+			$compiler "$@"
+			break
 			;;
 		-*)
 			echo found argument "$1"
