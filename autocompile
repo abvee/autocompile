@@ -1,0 +1,20 @@
+#!/bin/bash
+
+function compile {
+	for i in "$@"; do
+		echo "$i"
+	done
+}
+
+while [ -n "$1" ]; do
+	case "$1" in
+		--)
+			shift
+			compile "$@"
+			;;
+		-*)
+			echo found argument "$1"
+			;;
+	esac
+	shift
+done
