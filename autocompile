@@ -26,9 +26,15 @@ done
 $compiler "$@" "${files[@]}"
 
 # watch files
-while inotifywait -e move_self "${files[@]}"; do
+while inotifywait -e modify,move_self "${files[@]}"; do
 	# print divider
 	printf "$GREEN"
 	printf "=%.0s" `seq $COLUMNS`
 	printf "$NORMAL\n"
+
+	for i in "${files[@]}"; do
+		while ! test -e "$i"; do
+			:
+		done
+	done
 done
