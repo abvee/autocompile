@@ -37,4 +37,7 @@ while inotifywait -e modify,move_self "${files[@]}"; do
 			:
 		done
 	done
+
+	$compiler "$@" "${files[@]}"
+
 done
