@@ -2,15 +2,20 @@
 
 compiler=cc
 
+files=()
+
 while [ -n "$1" ]; do
 	case "$1" in
 		--)
 			shift
-			$compiler "$@"
+			$compiler "$@" "${files[@]}"
 			break
 			;;
 		-*)
 			echo found argument "$1"
+			;;
+		*) # Assume arg is file. Pass to compiler
+			files+=("$1")
 			;;
 	esac
 	shift
