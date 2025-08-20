@@ -1,14 +1,15 @@
 #!/bin/bash
+GREEN="\033[1;32m"
+NORMAL="\033[0m"
 
 compiler=cc
-
 files=()
 
+# handle args
 while [ -n "$1" ]; do
 	case "$1" in
 		--)
 			shift
-			$compiler "$@" "${files[@]}"
 			break
 			;;
 		-*)
@@ -19,4 +20,15 @@ while [ -n "$1" ]; do
 			;;
 	esac
 	shift
+done
+
+# compile once before waiting starts
+$compiler "$@" "${files[@]}"
+
+# watch files
+while inotifywait -e move_self "${files[@]}"; do
+	# print divider
+	printf "$GREEN"
+	printf "=%.0s" `seq $COLUMNS`
+	printf "$NORMAL\n"
 done
