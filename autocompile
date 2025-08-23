@@ -8,12 +8,16 @@ files=()
 # handle args
 while [ -n "$1" ]; do
 	case "$1" in
+		-c) # set the compiler to something other than cc
+			shift
+			compiler="$1"
+			;;
 		--)
 			shift
 			break
 			;;
 		-*)
-			echo found argument "$1"
+			echo argument "$1" is not a valid argument
 			;;
 		*) # Assume arg is file. Pass to compiler
 			files+=("$1")
