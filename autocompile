@@ -5,9 +5,26 @@ NORMAL="\033[0m"
 compiler=cc
 files=()
 
+usage() {
+	cat << _EOF_
+Usage: autocompile [OPTION].. [FILE]... -- [COMPILE OPTIONS]...
+Watch files and compile them if there's a change.
+Front end to inotifywait
+
+View man page for details and examples.
+  -h, --help	display this help message and exit
+  -c	set a custom compiler
+  --	interpret everything following as arguments to the compiler
+_EOF_
+}
+
 # handle args
 while [ -n "$1" ]; do
 	case "$1" in
+		-h|--help) # print usage info and exit
+			usage
+			exit
+			;;
 		-c) # set the compiler to something other than cc
 			shift
 			compiler="$1"
