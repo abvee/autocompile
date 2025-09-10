@@ -1,6 +1,6 @@
 #!/bin/bash
 echo puts autocompile in ~/.local/bin
 
-[ -d ~/.local/bin ] || echo ~/.local/bin doesn\'t exist && exit 1
+[ -d ~/.local/bin ] || echo ~/.local/bin doesn\'t exist
 
-cp autocompile ~/.local/bin
+[ -d ~/.local/bin ] && cp autocompile ~/.local/bin

@@ -4,6 +4,7 @@ NORMAL="\033[0m"
 
 compiler=cc
 files=()
+watch_files=() # files to watch
 
 usage() {
 	cat << _EOF_
@@ -28,6 +29,12 @@ while [ -n "$1" ]; do
 		-c) # set the compiler to something other than cc
 			shift
 			compiler="$1"
+			;;
+		-w) # additional files to watch
+			shift
+			# we now have to keep adding files until we hit another flag or --
+			# this is a more complex problem than anticipated, and I will solve it
+			# later.
 			;;
 		--)
 			shift
